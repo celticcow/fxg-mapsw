@@ -4,9 +4,23 @@ import sys
 import string
 import ipaddress
 import socket
+import time
 
 """
 """
+def connect(ip):
+    a_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    a_socket.settimeout(0.5)
+
+    location = (ip, 22)
+
+    result = a_socket.connect_ex(location)
+
+    if(result == 0):
+        return True
+    else:
+        return False
+# end connect
 
 def main():
     print("start of main")
@@ -20,13 +34,23 @@ def main():
 
         for y in range (1, 10):
             #print(y)
+            time.sleep(0.5)
 
             name = "fxg" + site_num + "sw" + x + str(y) + ".ground.fedex.com"
             
             try:
                 ip_addr = socket.gethostbyname(name)
-                print(name)
-                print(ip_addr)
+                #print(name)
+                #print(ip_addr)
+
+                if(connect(ip_addr)):
+                    print("ALIVE", end=" ")
+                    print(name, end=" ")
+                    print(ip_addr, end="\n")
+                else:
+                    print("NO CONN", end=" ")
+                    print(name, end=" ")
+                    print(ip_addr, end="\n")
             except:
                 pass
 
