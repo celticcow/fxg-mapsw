@@ -27,8 +27,12 @@ def main():
 
     debug = 1
 
-    site_num = input("enter site number : ")
+    site_name  = input("enter site name : ")
+    site_num   = input("enter site number : ")
 
+    local_grp_name = site_name + "-sw"
+
+    print("group," + local_grp_name + ",FXG-SW")
     for x in (list(string.ascii_lowercase)):
         #print(x)
 
@@ -44,13 +48,17 @@ def main():
                 #print(ip_addr)
 
                 if(connect(ip_addr)):
-                    print("ALIVE", end=" ")
-                    print(name, end=" ")
-                    print(ip_addr, end="\n")
+                    #print("ALIVE", end=" ")
+                    #print(name, end=" ")
+                    #print(ip_addr, end="\n")
+
+                    print("host," + ip_addr + "," + local_grp_name)
+
                 else:
-                    print("NO CONN", end=" ")
-                    print(name, end=" ")
-                    print(ip_addr, end="\n")
+                    pass
+                    #print("NO CONN", end=" ")
+                    #print(name, end=" ")
+                    #print(ip_addr, end="\n")
             except:
                 pass
 
